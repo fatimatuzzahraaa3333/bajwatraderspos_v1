@@ -1,0 +1,363 @@
+ssh root@89.116.20.112
+cd bajwatradersPOS
+git pull
+npm run build
+pm2 restart bajwatraders
+
+
+salesman
+  SaleProduct
+  
+
+Localhost
+  add new product from admin--
+    check in MongoDB Atlas--
+
+  add existing items from admin--
+    sale price--
+    purchase price--
+    quantity--
+
+
+website
+  add product from admin--
+    check in MongoDB Atlas--
+
+  add existing items from admin--
+    sale price--
+    purchase price--
+    quantity--
+
+
+
+display spinner at middle of screen
+responsive test for all pages
+responsive header
+check disabled button on following pages
+  login
+  update product
+  add new product
+
+
+folder structure
+
+src/
+├─ app/
+│  ├─ layout.tsx            ← Public layout (no session)
+│  ├─ page.tsx              ← Public page (no session)
+│  ├─ api/
+│  │   └─ adminData/
+│  │          └─ route.ts
+│  ├─ HomePage/
+│  │   └─ page.tsx          ← Public page (no session)
+│  ├─ FooterCommon/
+│  │   └─ page.tsx          ← Public page (no session)
+│  ├─ Services/
+│  │   └─ page.tsx          ← Public page (no session)
+│  ├─ adminData/
+│  │   ├─ HeaderPOSAdmin/
+│  │   │       └─ page.tsx
+│  │   ├─LoginAdmin/
+│  │   │       └─ page.tsx
+│  │   ├─ ProfileAdmin/
+│  │   │       └─ page.tsx
+│  │   └─ StockUpdateSelected/
+│  │           └─ page.tsx
+│  ├─ userData/
+│  │   ├─ HeaderPOSUser/
+│  │   │       └─ page.tsx
+│  │   ├─LoginUser/
+│  │   │       └─ page.tsx
+│  │   ├─RegisterUser/
+│  │   │       └─ page.tsx
+│  │   ├─ ProfileUser/
+│  │   │       └─ page.tsx
+│  │   └─ SaleProduct/
+               └─ page.tsx
+
+
+
+
+folder structure for containing both protected and non-protected page. 
+There are two separate layouts
+
+src/app/
+│
+├─ layout.tsx                ← Public layout (no SessionProvider)
+│
+├─ page.tsx                  ← Public homepage
+│
+├─ about/page.tsx            ← Public page
+│
+├─ userData/
+│   ├─ layout.tsx            ← Has SessionProvider (for login/register/profile)
+│   ├─ LoginUser/page.tsx
+│   └─ RegisterUser/page.tsx
+│
+└─ dashboard/
+    ├─ layout.tsx            ← Has SessionProvider + Navbar
+    └─ page.tsx              ← Protected page
+
+
+
+
+
+create hooks/utiles to protect multiple pages
+protect pages using cookies
+
+
+Safer Alternatives
+Option A — Use Only Secure HttpOnly Cookies
+
+Store JWT or session token in HttpOnly, Secure, SameSite cookie.
+
+Server reads cookie directly — no need for localStorage.
+
+SSR-friendly, XSS-resistant, works for all roles.
+
+Option B — Hybrid but Safe
+
+Store access token in memory (not localStorage).
+
+Store refresh token in HttpOnly cookie.
+
+For protected routes, server validates access token, and can issue a new one using refresh token automatically.
+
+This achieves:
+
+XSS resistance (token never exposed to JS)
+
+Automatic server validation
+
+No need for localStorage at all
+
+
+
+
+
+
+
+
+
+
+const token = localStorage.getItem("token");
+const userType = sessionStorage.getItem("userType");
+
+localStorage.removeItem("token");
+sessionStorage.removeItem("userType");
+
+
+
+
+When token is expired after 1h. And i am on page ProfileUser (work offline mode also), then page is reloading again and again. When i press "Logout" and again login, the ProfileUser page work fine.
+But i don't want reloading again and again after token expiry. It should return UserLogin page.
+
+
+I run below command
+npm run build
+npm start
+
+The project build and run successfully.
+manifest.json file is shown on DevTools/Application
+
+When i opened below link, then it shows the JS perfectly as expected
+http://localhost:3000/sw.js
+
+
+i have following code in next.config.mjs
+
+
+
+import withPWA from "next-pwa";
+
+const withPWAConfig = withPWA({
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+});
+
+const config = {
+    reactStrictMode: true,
+    swcMinify: true,
+};
+
+export default withPWAConfig(config);
+
+
+
+
+but i didn't find "Service Workers" tab in DevTools
+I notices one more thing that when i set "offline" in DevTools/Network/, then localhost doesn't run
+When i opened below link, then it doesn't contain localhost:3000
+chrome://serviceworker-internals/
+
+
+offloading data saving
+
+no sale if stock is 0
+deploy the POS
+
+
+when page is refresh after 1 hour, then page is direct to login page (good) but message displays as "token expire"...both page, adminProfile and userProfile
+Moreover, reduce time for timeout
+
+
+if token exist, then login page shouldn't be opened.
+
+
+remove alert from salesman account.
+
+
+why so wait even for loading "Profile Admin" page
+
+
+  Generate Bill --> bill shown on Alert window
+
+Display stock
+
+
+remove all console.log
+
+
+
+
+
+-------------------------------
+two examples of actual strings
+-------------------------------
+MONGODB_URI=mongodb+srv://muhammadabobakar_db_user:XqWtb8cNIJBa7VsD@cluster0.rsal2xt.mongodb.net/BajwaPOS?retryWrites=true&w=majority&appName=Cluster0
+
+MONGODB_URI=mongodb+srv://11alishan:abc123abc123@clustermern.j395nyp.mongodb.net/bajwa_pos?retryWrites=true&w=majority&appName=ClusterMERN
+
+
+
+-----------------
+export and import commands
+always open new CMD, if string is changed
+------------------------------------------
+download and install
+mongodb-database-tools-windows-x86_64-100.13.0
+
+
+add its bin/ folder in evironemnet varaibles
+
+and then use below commands
+
+
+mongoexport --uri="mongodb+srv://11alishan:abc123abc123@clustermern.j395nyp.mongodb.net/bajwa_pos?retryWrites=true&w=majority&appName=ClusterMERN" --collection=sale_collection --out=sale_collection.json
+
+
+mongoimport --uri="mongodb+srv://muhammadabobakar_db_user:XqWtb8cNIJBa7VsD@cluster0.rsal2xt.mongodb.net/BajwaPOS" --collection=sale_collection --file="C:\Users\abobakar\sale_collection.json"
+
+
+
+
+****************************************
+run on console to activate "service worker"
+****************************************
+
+navigator.serviceWorker.register('/sw.js')
+  .then(reg => console.log('✅ Registered', reg))
+  .catch(err => console.log('❌ Registration failed:', err));
+
+
+
+****************************************
+Shades of Blue
+****************************************
+
+Shade Name	HEX Code	Description
+Lightest Tint (90%)	#E6F3FA	Very pale blue, great for background or subtle highlights
+Lighter Tint (70%)	#CFE8F4	Soft sky blue for section backgrounds
+Base Color	#ADD8E6	Original Light Blue (neutral, calm, friendly)
+Medium Shade (−20%)	#7EC0DA	Balanced blue for hover or card backgrounds
+Deeper Shade (−40%)	#5CA9CD	Medium-dark blue for focus or headers
+Dark Shade (−60%)	#3E92BF	Deep, professional tone for main buttons
+Darker Shade (−80%)	#2B7EA7	Strong blue accent, good for active states
+Darkest Tone (−100%)	#1A678C	Nearly navy, ideal for text or emphasis
+
+****************************************
+Dashboard
+***************************************
+
+ const GotoDashboard = ()=>{
+    // Redirect to Bill Page
+      router.push("/userData/ProfileUser/");
+  }
+
+<div className="text-center mt-8">
+      <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
+                     focus:ring-blue-300 font-medium rounded-lg text-sm px-5 
+                     py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 
+                     focus:outline-none dark:focus:ring-blue-800"
+              onClick={GotoDashboard}>
+              Dashboard
+      </button>
+      </div>
+
+
+
+
+****************************************
+Logout
+*****************************************
+
+const handleLogout = async () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem("userType"); // Clear userType from storage
+    router.push("/userData/LoginUser"); // Redirect to LoginUser
+
+    try {
+      const response = await fetch("../../api/auth/logout", {
+        method: "GET",
+      });
+      const data = await response.json();
+      if (!data.success) {
+        console.error("Error logging out:", data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+<div className="text-right mt-8 mr-8">
+      <button className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 
+                     focus:ring-blue-300 font-medium rounded-lg text-sm px-5 
+                     py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 
+                     focus:outline-none dark:focus:ring-red-800"
+              onClick={handleLogout}>
+              Logout
+      </button>
+      </div>
+
+
+
+
+****************************************
+Loading Button and disabled
+*****************************************
+const [loading, setLoading] = useState(false); // Spinner state
+const [buttonDisable, setbuttonDisable] = useState(false);
+
+
+
+setLoading(true);
+setbuttonDisable(true);
+
+
+
+{/* Login Button with Spinner */}
+<button
+  type="submit"
+  className="formButton flex items-center justify-center gap-2 disabled:opacity-70"
+  disabled={buttonDisable}
+>
+  {loading ? (
+    <>
+      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      <span>Logging in...</span>
+    </>
+  ) : (
+    "Login"
+  )}
+</button>
