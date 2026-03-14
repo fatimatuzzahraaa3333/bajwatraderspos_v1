@@ -14,7 +14,7 @@ interface MongooseCache {
 
 // Attach cache to the global object
 declare global {
-  var mongoose: MongooseCache;
+  var mongoose: MongooseCache | undefined;
 }
 
 let cached = global.mongoose || { conn: null, promise: null };
