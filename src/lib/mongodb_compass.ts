@@ -12,6 +12,11 @@ interface MongooseCache {
   promise: Promise<Connection> | null;
 }
 
+type MongooseCache = {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+};
+
 // Attach cache to the global object
 declare global {
   var mongoose: MongooseCache | undefined;
