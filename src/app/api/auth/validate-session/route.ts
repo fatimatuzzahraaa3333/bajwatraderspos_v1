@@ -1,5 +1,7 @@
 /* File: src/app/api/auth/validate-session/route.ts */
 
+export const dynamic = "force-dynamic";
+
 import { connectToDatabase } from "@/lib/mongodb";
 import Session from "@/models/Session";
 import { cookies } from "next/headers";
