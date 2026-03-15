@@ -15,12 +15,14 @@ export async function GET() {
 
     // Get session cookie
     const sessionId = cookies().get("sessionId")?.value;
+    console.log("Session cookie received:", sessionId);
     if (!sessionId) {
       return NextResponse.json({ valid: false, reason: "No session found in cookies" });
     }
 
     // Verify session in DB
     const session = await Session.findOne({ sessionId });
+    console.log("session from database:", session);
     if (!session) {
       return NextResponse.json({valid: false, reason: "Invalid session according to our database" });
     }
