@@ -1,6 +1,6 @@
 /* File: src/app/api/auth/validate-session/route.ts */
 
-export const dynamic = "force-dynamic";
+//export const dynamic = "force-dynamic";
 
 import { connectToDatabase } from "@/lib/mongodb";
 import Session from "@/models/Session";
@@ -17,14 +17,14 @@ export async function GET() {
 
     // Get session cookie
     const sessionId = cookies().get("sessionId")?.value;
-    console.log("Session cookie received:", sessionId);
+    //console.log("Session cookie received:", sessionId);
     if (!sessionId) {
       return NextResponse.json({ valid: false, reason: "No session found in cookies" });
     }
 
     // Verify session in DB
     const session = await Session.findOne({ sessionId });
-    console.log("session from database:", session);
+    //console.log("session from database:", session);
     if (!session) {
       return NextResponse.json({valid: false, reason: "Invalid session according to our database" });
     }
