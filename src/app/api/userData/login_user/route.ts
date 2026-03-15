@@ -62,9 +62,11 @@ export async function POST(req: Request) {
     cookies().set("sessionId", sessionId, {
       httpOnly: true,
       secure: true,           // HTTPS only
-      sameSite: "lax",     // better protection in production
+      //sameSite: "strict",     // better protection in production
+      sameSite: "lax",
       maxAge: 60 * 30,
-      path: "/"
+      path: "/",
+      //domain: ".edu2skill.online", // use your top-level domain (include dot for subdomains)
     });
   }
 
