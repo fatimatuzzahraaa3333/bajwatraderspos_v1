@@ -18,17 +18,17 @@ export default function ProfileAdmin(): JSX.Element {
   const router = useRouter();
 
 useEffect(() => {
-  //console.log("ProfileAdmin is loading...");
+  console.log("ProfileAdmin is loading...");
     async function validateSession() {
       const res = await fetch("/api/auth/validate-session", {
         credentials: "include" // ensures cookies are stored/sent
       });
       const data = await res.json();
-      //console.log("ProfileAdmin Page, Responsded data from /api/auth/validate-session ", data)
+      console.log("ProfileAdmin Page, Responsded data from /api/auth/validate-session ", data)
       if (!data.valid) {
         console.log("Return to LoginAdmin page");
         console.log("Reason: ", data.reason);
-        router.push("/adminData/LoginAdmin");
+        //router.push("/adminData/LoginAdmin");
       } else {
         //await refreshSession();
         console.log("successfully login");
