@@ -26,13 +26,13 @@ useEffect(() => {
       });
       const data = await res.json();
       if (!data.valid) {
-        console.log("Return to LoginUser page");
-        console.log("Reason: ", data.reason);
+        //console.log("Return to LoginUser page");
+        //console.log("Reason: ", data.reason);
         router.push("/userData/LoginUser");
       } else {
         //await refreshSession();
-        console.log("successfully login");
-        console.log("Reason: ", data.reason);
+        //console.log("successfully login");
+        //console.log("Reason: ", data.reason);
         setLoading(false);
       }
     }
