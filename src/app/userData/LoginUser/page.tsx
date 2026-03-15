@@ -39,7 +39,7 @@ export default function Login() {
 
       if (data.success === "OK") {
         await refreshSession();
-        console.log("successfully logged in");
+        //console.log("successfully logged in");
         router.push("/userData/ProfileUser");
       } else {
         setError(data.message || "Invalid email or password");
